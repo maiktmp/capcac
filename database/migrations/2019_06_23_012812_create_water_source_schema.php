@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateWaterSourceSchema extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('transaction_type', function (Blueprint $table) {
@@ -33,6 +28,7 @@ class CreateWaterSourceSchema extends Migration
         Schema::create('water_source', function (Blueprint $table) {
             $table->increments('id');
             $table->date('registration_date');
+            $table->string('number');
             $table->timestamps();
             $table->unsignedInteger('fk_id_state');
             $table->unsignedInteger('fk_id_client');

@@ -42,6 +42,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Client whereTown($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Client whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Client whereZipAddress($value)
+ * @property string $email
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Client whereEmail($value)
  */
 class Client extends Model
 {
@@ -87,4 +89,6 @@ class Client extends Model
             'id'
         );
     }
+
+
 }

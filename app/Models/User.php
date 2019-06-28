@@ -31,6 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
+ * @property-read mixed $full_name
  */
 class User extends Model
 {
@@ -42,6 +43,9 @@ class User extends Model
         'name',
         'last_name',
     ];
+
+    protected $appends = ["full_name"];
+
 
     public static function rules($prefix = "")
     {
@@ -78,5 +82,10 @@ class User extends Model
             'fk_id_user',
             'id'
         );
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->name . " " . $this->last_name;
     }
 }

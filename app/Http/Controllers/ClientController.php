@@ -7,10 +7,7 @@ use App\Http\Request\CreateUserRequest;
 use App\Models\Client;
 use App\Models\Rol;
 use App\Models\User;
-use App\Models\WaterSource;
-use Carbon\Carbon;
 use DB;
-use Illuminate\Http\Request;
 use Exception;
 
 class ClientController extends Controller
@@ -36,12 +33,12 @@ class ClientController extends Controller
             $client->fk_id_user = $user->id;
             $transactionOk = $transactionOk && $client->save();
 
-            $waterSource = new WaterSource();
-            $waterSource->registration_date = Carbon::now();
-            $waterSource->fk_id_client = $client->id;
-            $waterSource->fk_id_state = $request->input('fk_id_state');
-            $waterSource->fk_id_water_source_type = $request->input('fk_id_water_source_type');
-            $transactionOk = $transactionOk && $waterSource->save();
+//            $waterSource = new WaterSource();
+//            $waterSource->registration_date = Carbon::now();
+//            $waterSource->fk_id_client = $client->id;
+//            $waterSource->fk_id_state = $request->input('fk_id_state');
+//            $waterSource->fk_id_water_source_type = $request->input('fk_id_water_source_type');
+//            $transactionOk = $transactionOk && $waterSource->save();
             if ($transactionOk) {
                 DB::commit();
                 return redirect()->route('client_index');
