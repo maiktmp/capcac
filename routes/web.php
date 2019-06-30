@@ -37,6 +37,16 @@ Route::post(
     'ClientController@createPost'
 )->name('client_create_post');
 
+Route::get(
+    'client/{clientId}/update',
+    'ClientController@update'
+)->name('client_update');
+
+Route::post(
+    'client/{clientId}/update',
+    'ClientController@updatePost'
+)->name('client_update_post');
+
 /*
  * ==========================================
  *              WaterSources
@@ -57,6 +67,16 @@ Route::post(
     'client/{clientId}/water_sources/create',
     'WaterSourceController@createPost'
 )->name('water_sources_create_post');
+
+Route::get(
+    'client/{clientId}/water_sources/update',
+    'WaterSourceController@update'
+)->name('water_sources_update');
+
+Route::post(
+    'water_sources/{waterSourceId}/update',
+    'WaterSourceController@updatePost'
+)->name('water_sources_update_post');
 
 /*
  * ==========================================

@@ -1,5 +1,6 @@
 $(document).ready(function (e) {
     $('[data-toggle="tooltip"]').tooltip();
+
     $('.btn-upsert').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');

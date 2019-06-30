@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Request\CreateWaterSourceRequest;
+use App\Http\Request\UpdateUserRequest;
+use App\Http\Request\UpdateWaterSourceRequest;
 use App\Models\Client;
 use App\Models\WaterSource;
 use Illuminate\Http\Request;
@@ -41,11 +43,19 @@ class WaterSourceController extends Controller
 
     public function update($waterSourceId)
     {
-
+        $waterSource = WaterSource::find($waterSourceId);
+        return view('water_source.update', ['waterSource' => $waterSource]);
     }
 
-    public function updatePost(Request $request, $waterSourceId)
+    public function updatePost(UpdateWaterSourceRequest $request, $waterSourceId)
     {
-
+        $waterSource = WaterSource::find($waterSourceId);
+        $waterSource->number = $request->input('number');
+        $waterSource->registration_date = $request->input('registration_date');
+        $waterSource->fk_id_state = $request->input('fk_id_state');
+        $waterSource->fk_id_water_source_type = $request->input('fk_id_water_source_type');
+        if ($waterSource->save()) {
+            return response()->json(['success' => 'true']);
+        }
     }
 }

@@ -2,12 +2,11 @@
 
 namespace App\Http\Request;
 
-use App\Models\Client;
-use App\Models\User;
 use App\Models\WaterSource;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class CreateWaterSourceRequest extends FormRequest
+class UpdateWaterSourceRequest extends FormRequest
 {
     public function authorize()
     {
@@ -16,9 +15,11 @@ class CreateWaterSourceRequest extends FormRequest
 
     public function rules()
     {
+        $waterSourceId = $this->route()->parameter('waterSourceId') * 1;
         return array_merge(
-            ['number' => 'numeric|required|unique:water_source,number'],
-            WaterSource::rules());
+            ['number' => 'numeric|required|unique:water_source,number,' . $waterSourceId],
+            WaterSource::rules()
+        );
     }
 
     public function messages()

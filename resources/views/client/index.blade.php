@@ -47,6 +47,13 @@
                                title="Ver tomas de agua">
                                 <i class="fas fa-tint fa-2x"></i>
                             </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="{{route('client_update',['clientId'=>$user->client->id])}}"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Editar usuario">
+                                <i class="fas fa-user-edit fa-2x"></i>
+                            </a>
                         </td>
                     </tr>
                 @empty

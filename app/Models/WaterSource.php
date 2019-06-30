@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * App\Models\WaterSource
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource query()
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource query()
  * @mixin \Eloquent
  * @property int $id
  * @property string $registration_date
@@ -19,19 +19,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $fk_id_state
  * @property int $fk_id_client
  * @property int $fk_id_water_source_type
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereFkIdClient($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereFkIdState($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereFkIdWaterSourceType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereRegistrationDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereFkIdClient($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereFkIdState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereFkIdWaterSourceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereRegistrationDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereUpdatedAt($value)
  * @property string $number
  * @property-read \App\Models\Client $client
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Payment[] $payments
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Penalty[] $penalties
  * @property-read \App\Models\WaterSourceType $waterSourceType
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\WaterSource whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|WaterSource whereNumber($value)
  * @property-read \App\Models\State $state
  */
 class WaterSource extends Model
@@ -41,7 +41,6 @@ class WaterSource extends Model
     public static function rules()
     {
         return [
-            'number' => 'numeric|required|unique:water_source,number',
             'registration_date' => 'date|required'
         ];
     }

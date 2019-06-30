@@ -51,6 +51,14 @@
                         <td>{{$waterSource->waterSourceType->name}}</td>
                         <td>{{$waterSource->state->name}}</td>
                         <td>
+                            <a href="{{route('water_sources_update',['waterSourceId'=>$waterSource->id])}}"
+                               class='btn-upsert'
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Actualizar toma">
+                                <i class="fas fa-edit fa-2x"></i>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
                             <a href="{{route('water_sources_create_payment',['waterSourceId'=>$waterSource->id])}}"
                                class='btn-create-payment'
                                data-toggle="tooltip"
