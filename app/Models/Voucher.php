@@ -38,4 +38,22 @@ use Illuminate\Database\Eloquent\Model;
 class Voucher extends Model
 {
     protected $table = "voucher";
+
+    public function transactionType()
+    {
+        return $this->belongsTo(
+            TransactionType::class,
+            'fk_id_transaction_type',
+            'id'
+        );
+    }
+
+    public function payment()
+    {
+        return $this->hasOne(
+            Payment::class,
+            'fk_id_voucher',
+            'id'
+        );
+    }
 }

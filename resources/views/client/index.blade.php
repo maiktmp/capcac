@@ -11,6 +11,7 @@
         })
     </script>
 @endpush
+
 @section('content')
     <div class="card m-5  rounded">
         <div class="card-body">
@@ -40,7 +41,7 @@
                         <td>{{$user->username}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->last_name}}</td>
-                        <td>
+                        <td class="text-center">
                             <a href="{{route('water_sources_index',['clientId'=>$user->client->id])}}"
                                data-toggle="tooltip"
                                data-placement="top"

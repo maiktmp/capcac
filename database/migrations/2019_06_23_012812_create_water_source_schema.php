@@ -61,6 +61,20 @@ class CreateWaterSourceSchema extends Migration
                 ->on('water_source');
         });
 
+        Schema::create('voucher', function (Blueprint $table) {
+            $table->increments('id');
+            $table->date('date');
+            $table->decimal('amount', 13, 2);
+            $table->string('description')->nullable();
+            $table->string('voucher_url')->nullable();
+            $table->timestamps();
+            $table->unsignedInteger('fk_id_transaction_type');
+
+            $table->foreign('fk_id_transaction_type')
+                ->references('id')
+                ->on('transaction_type');
+        });
+
         Schema::create('payment', function (Blueprint $table) {
             $table->increments('id');
             $table->date('start_date');
@@ -69,24 +83,16 @@ class CreateWaterSourceSchema extends Migration
             $table->timestamps();
 
             $table->unsignedInteger('fk_id_water_source');
+            $table->unsignedInteger('fk_id_voucher');
 
             $table->foreign('fk_id_water_source')
                 ->references('id')
                 ->on('water_source');
-        });
 
-        Schema::create('voucher', function (Blueprint $table) {
-            $table->increments('id');
-            $table->date('date');
-            $table->decimal('amount', 13, 2);
-            $table->string('description');
-            $table->string('voucher_url');
-            $table->timestamps();
-            $table->unsignedInteger('fk_id_transaction_type');
-
-            $table->foreign('fk_id_transaction_type')
+            $table->foreign('fk_id_voucher')
                 ->references('id')
-                ->on('transaction_type');
+                ->on('voucher');
+
         });
 
         Schema::create('penalty_payment', function (Blueprint $table) {

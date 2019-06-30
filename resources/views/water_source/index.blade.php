@@ -50,7 +50,7 @@
                         <td>{{$waterSource->registration_date}}</td>
                         <td>{{$waterSource->waterSourceType->name}}</td>
                         <td>{{$waterSource->state->name}}</td>
-                        <td>
+                        <td class="text-center">
                             <a href="{{route('water_sources_update',['waterSourceId'=>$waterSource->id])}}"
                                class='btn-upsert'
                                data-toggle="tooltip"
@@ -73,6 +73,14 @@
                                data-placement="top"
                                title="Ver pagos">
                                 <i class="fas fa-calendar-alt fa-2x"></i>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="{{route('water_sources_payments',['waterSourceId'=>$waterSource->id])}}"
+                               class='btn-index-payments'
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Levantar multa">
+                                <i class="fas fa-exclamation-circle fa-2x"></i>
                             </a>
                         </td>
                     </tr>

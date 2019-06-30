@@ -51,6 +51,13 @@
                     <h2 id="lbl-total-payment">Total: $0.0</h2>
                     <h5 id="lbl-total-months"></h5>
                 </div>
+                <div class="col-12">
+                    @textarea([
+                    'label' => 'Descripción',
+                    'name' => 'description',
+                    'rows' => 5
+                    ])
+                </div>
             </div>
             <div class="col-12 text-center">
                 <button

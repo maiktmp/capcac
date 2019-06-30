@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Payment;
+use App\Models\TransactionType;
+use App\Models\Voucher;
 use App\Models\WaterSource;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -36,14 +39,38 @@ class PaymentController extends Controller
 
     public function createPost(Request $request, $waterSourceId)
     {
+
         $waterSource = WaterSource::find($waterSourceId);
         $startDate = $request->input('start_date', null);
         $endDate = $request->input('end_date', null);
-        $payment = new Payment();
-        $payment->fill($request->all());
-        $payment->price = $waterSource->computePayment($startDate, $endDate);
-        $payment->fk_id_water_source = $waterSourceId;
-        $payment->save();
-        return response()->json(['success' => true]);
+
+        $voucher = new Voucher();
+        $voucher->date = Carbon::now();
+        $voucher->amount = $waterSource->computePayment($startDate, $endDate);
+        $voucher->description = $request->input('description', null);
+        $voucher->fk_id_transaction_type = TransactionType::INPUT;
+        try {
+            \DB::beginTransaction();
+            $voucher->save();
+
+            $payment = new Payment();
+            $payment->fill($request->all());
+            $payment->price = $waterSource->computePayment($startDate, $endDate);
+            $payment->fk_id_water_source = $waterSourceId;
+            $payment->fk_id_voucher = $voucher->id;
+            $payment->save();
+
+            \DB::commit();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            \DB::rollBack();
+            abort(500, 'Ocurrio un error ' . $e->getMessage());
+        }
+    }
+
+    public function viewPaymentVoucher($paymentId)
+    {
+        $payment = Payment::with('voucher')->find($paymentId);
+        return view('voucher.pdf', ['payment' => $payment]);
     }
 }

@@ -25,5 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TransactionType extends Model
 {
+    const INPUT = 1;
+    const OUTPUT = 2;
     protected $table = "transaction_type";
 }

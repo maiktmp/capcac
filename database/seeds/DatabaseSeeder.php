@@ -36,5 +36,10 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Cliente']
         ]);
 
+        DB::table('transaction_type')->insert([
+            ['name' => 'Ingreso'],
+            ['name' => 'Egreso']
+        ]);
+
     }
 }

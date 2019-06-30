@@ -103,3 +103,8 @@ Route::post(
     'water_source/{waterSourceId}/payment/create',
     'PaymentController@createPost'
 )->name('water_sources_create_payment_post');
+
+
+Route::get('payment/{paymentId}/voucher',
+    'PaymentController@viewPaymentVoucher'
+)->name('payment_voucher');

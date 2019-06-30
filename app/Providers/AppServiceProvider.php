@@ -22,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         });
         Blade::include('components.input', 'input');
         Blade::include('components.select', 'select');
+        Blade::include('components.textarea', 'textarea');
     }
 
     /**

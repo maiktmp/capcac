@@ -49,4 +49,13 @@ class Payment extends Model
             'id'
         );
     }
+
+    public function voucher()
+    {
+        return $this->belongsTo(
+            Voucher::class,
+            'fk_id_voucher',
+            'id'
+        );
+    }
 }
