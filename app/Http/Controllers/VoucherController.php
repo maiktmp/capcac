@@ -16,6 +16,12 @@ use Illuminate\Http\Request;
 
 class VoucherController extends Controller
 {
+    public function index()
+    {
+//        $vouchers = Voucher::all()->groupBy('MONTH()');
+        return dd(Voucher::getSumInputs(8));
+        return view('voucher.index');
+    }
 
     public function createPost(CreateVoucherRequest $request)
     {

@@ -143,8 +143,8 @@ Route::get(
  * ==========================================
  */
 
-Route::view('transactions',
-    'voucher.index')
+Route::get('transactions',
+    'VoucherController@index')
 ->name('transactions_index');
 
 Route::view(

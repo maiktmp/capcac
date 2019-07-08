@@ -49,7 +49,7 @@ class Voucher extends Model
 
     public static function messages()
     {
-        return  [
+        return [
             'amount.required' => 'El campo es requerido',
             'file_url.required' => 'El campo es requerido',
             'file_url.file' => 'Ingrese un archivo válido'
@@ -72,5 +72,19 @@ class Voucher extends Model
             'fk_id_voucher',
             'id'
         );
+    }
+
+    public static function getMonths()
+    {
+        return self::select(\DB::raw(" COUNT(*) as number, MONTH(date) as month"))
+            ->groupBy('month')
+            ->get();
+    }
+
+    public  static function getSumInputs($month)
+    {
+        return self::select(\DB::raw("SUM(amount) as total"))
+            ->whereRaw('MONTH(date) = ' . $month)
+            ->get();
     }
 }
