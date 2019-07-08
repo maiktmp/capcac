@@ -50,9 +50,10 @@ class CreateWaterSourceSchema extends Migration
         Schema::create('penalty', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->decimal('amount', 13, 2);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unsignedInteger('fk_id_water_source');
 

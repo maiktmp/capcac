@@ -39,6 +39,23 @@ class Voucher extends Model
 {
     protected $table = "voucher";
 
+    public static function rules()
+    {
+        return [
+            'amount' => 'required',
+            'file_url' => 'required|file'
+        ];
+    }
+
+    public static function messages()
+    {
+        return  [
+            'amount.required' => 'El campo es requerido',
+            'file_url.required' => 'El campo es requerido',
+            'file_url.file' => 'Ingrese un archivo válido'
+        ];
+    }
+
     public function transactionType()
     {
         return $this->belongsTo(

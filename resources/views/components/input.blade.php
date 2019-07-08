@@ -42,6 +42,7 @@
                class="form-control {{$inputClass??""}} {{ $errors->has($errorName) ? ' is-invalid' : '' }}"
                name="{{$name??""}}"
                value="{{ $value ?? null }}"
+               style="min-height: 41px"
         @forelse($properties as $property=>$value)
             {{$property}}="{{$value}}"
         @empty

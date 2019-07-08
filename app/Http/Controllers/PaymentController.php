@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Payment;
+use App\Models\Penalty;
 use App\Models\TransactionType;
 use App\Models\Voucher;
 use App\Models\WaterSource;
@@ -15,7 +16,11 @@ class PaymentController extends Controller
     public function index($waterSourceId)
     {
         $payments = Payment::whereFkIdWaterSource($waterSourceId)->paginate(15);
-        return view('payment.index', ['payments' => $payments]);
+        $penalties = Penalty::withTrashed()->paginate(15);
+        return view('payment.index', [
+            'penalties' => $penalties,
+            'payments' => $payments
+        ]);
     }
 
     public function create($waterSourceId)

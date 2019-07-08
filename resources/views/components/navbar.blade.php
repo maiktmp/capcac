@@ -13,7 +13,7 @@
                 <a class="nav-link" href="#">Bienes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Transacciónes</a>
+                <a class="nav-link" href="{{route('transactions_index')}}">Transacciónes</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Buzón</a>

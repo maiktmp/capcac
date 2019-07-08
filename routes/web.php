@@ -108,3 +108,51 @@ Route::post(
 Route::get('payment/{paymentId}/voucher',
     'PaymentController@viewPaymentVoucher'
 )->name('payment_voucher');
+
+
+/*
+ * ==========================================
+ *              Penalty
+ * ==========================================
+ */
+
+Route::get(
+    'water_source/{waterSourceId}/penalty/index',
+    'PenaltyController@index'
+)->name('penalty_index');
+
+Route::get(
+    'water_source/{waterSourceId}/penalty/create',
+    'PenaltyController@create'
+)->name('penalty_create');
+
+Route::post(
+    'water_source/{waterSourceId}/penalty/create',
+    'PenaltyController@createPost'
+)->name('penalty_create_post');
+
+
+Route::get(
+    'penalty/{penaltyId}/pay',
+    'PenaltyController@penaltyPayment'
+)->name('penalty_pay');
+
+/*
+ * ==========================================
+ *              Transactions
+ * ==========================================
+ */
+
+Route::view('transactions',
+    'voucher.index')
+->name('transactions_index');
+
+Route::view(
+    'transaction/crete',
+    'voucher.create_transaction'
+)->name('transaction_create');
+
+Route::post(
+    'transaction/crete',
+    'VoucherController@createPost'
+)->name('transaction_create_post');

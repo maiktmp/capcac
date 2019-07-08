@@ -56,8 +56,54 @@ $(document).ready(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');
         $('#modal-water-source-header').html('Pagos registrados');
-        $('#modal-water-source-size').removeClass('modal-lg');
+        $('#modal-water-source-size').addClass('modal-lg');
         modalTools.renderView('modal-water-source', url);
+        $(document).on('click','.page-link',function (e) {
+            e.preventDefault();
+            modalTools.renderView('modal-water-source', $(this).attr('href'));
+        });
     });
 
+    $('.btn-create-penalty').click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $('#modal-water-source-header').html('Crear multa');
+        $('#modal-water-source-size').removeClass('modal-lg');
+        modalTools.renderView('modal-water-source', url, function () {
+            formTools.useAjaxOnSubmit('form-penalty-create', function () {
+                location.reload();
+            })
+        });
+    });
+    $('.btn-list-penalties').click(function (e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+        $('#modal-water-source-header').html('Multas registradas');
+        $('#modal-water-source-size').addClass('modal-lg');
+        modalTools.renderView('modal-water-source', url);
+        $(document).on('click','.page-link',function (e) {
+            e.preventDefault();
+            modalTools.renderView('modal-water-source', $(this).attr('href'));
+        });
+        $(document).on('click','.btn-penalty-payment',function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            Swal.fire({
+                title: '¿Desea realizar el pago de la multa?',
+                text: "La multa quedara pagada, esta acción no se podra revertir",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Pagar'
+            }).then((result) => {
+                if (result.value) {
+                    $.get(url,function () {
+                        $('#modal-water-source').modal('hide');
+                    });
+                }
+            })
+        });
+    });
 });
+

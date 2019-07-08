@@ -3,6 +3,7 @@
     /* @var $client \App\Models\Client*/
 @endphp
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/es.js"></script>
     <script src="{{asset('commons/date_picker/bootstrap-material-datetimepicker.js')}}"></script>
@@ -75,12 +76,20 @@
                                 <i class="fas fa-calendar-alt fa-2x"></i>
                             </a>
                             &nbsp;&nbsp;&nbsp;
-                            <a href="{{route('water_sources_payments',['waterSourceId'=>$waterSource->id])}}"
-                               class='btn-index-payments'
+                            <a href="{{route('penalty_create',['waterSourceId'=>$waterSource->id])}}"
+                               class='btn-create-penalty'
                                data-toggle="tooltip"
                                data-placement="top"
                                title="Levantar multa">
                                 <i class="fas fa-exclamation-circle fa-2x"></i>
+                            </a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="{{route('penalty_index',['waterSourceId'=>$waterSource->id])}}"
+                               class='btn-list-penalties'
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Mostrar multas">
+                                <i class="fas fa-clipboard-list fa-2x"></i>
                             </a>
                         </td>
                     </tr>
@@ -91,6 +100,7 @@
                 @endforelse
                 </tbody>
             </table>
+            {{ $waterSources->links() }}
         </div>
     </div>
 
