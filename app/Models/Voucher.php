@@ -81,10 +81,13 @@ class Voucher extends Model
             ->get();
     }
 
-    public  static function getSumInputs($month)
+    public static function getSumInputs($month, $movement = null)
     {
-        return self::select(\DB::raw("SUM(amount) as total"))
-            ->whereRaw('MONTH(date) = ' . $month)
-            ->get();
+        $query = self::select(\DB::raw("SUM(amount) as total"))
+            ->whereRaw('MONTH(date) = ' . $month);
+        if ($movement !== null) {
+            $query->where('fk_id_transaction_type', $movement);
+        }
+        return $query->get();
     }
 }

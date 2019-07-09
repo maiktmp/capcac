@@ -156,3 +156,7 @@ Route::post(
     'transaction/crete',
     'VoucherController@createPost'
 )->name('transaction_create_post');
+
+Route::get('transactions/filer',
+    'VoucherController@filter')
+    ->name('transactions_filter');

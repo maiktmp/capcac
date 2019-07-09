@@ -19,8 +19,9 @@ class VoucherController extends Controller
     public function index()
     {
 //        $vouchers = Voucher::all()->groupBy('MONTH()');
-        return dd(Voucher::getSumInputs(8));
-        return view('voucher.index');
+        $months = Voucher::getMonths();
+//        return dd($months);
+        return view('voucher.index', ['months' => $months]);
     }
 
     public function createPost(CreateVoucherRequest $request)
@@ -46,6 +47,42 @@ class VoucherController extends Controller
             }
         }
 
+    }
+
+    public function filter(Request $request)
+    {
+        $id = $request->get('id', null);
+        $description = $request->get('description', null);
+        $start = $request->get('start', null);
+        $end = $request->get('end', null);
+        $type = $request->get('type', 0) * 1;
+
+//        return dd($end);
+        $filtered = false;
+        $data = Voucher::query();
+        if (!is_null($id)) {
+            $filtered = true;
+            $data->where('id', $id);
+        }
+
+        if (!is_null($description)) {
+            $filtered = true;
+            $data->where('description', 'like', '%' . $description . '%');
+        }
+
+        if (!is_null($start) && !is_null($end)) {
+            $filtered = true;
+            $data->whereBetween('date', [$start, $end]);
+        }
+
+        if ($type !== 0) {
+            $filtered = true;
+            $data->where('fk_id_transaction_type', $type);
+        }
+//        return dd($data);
+
+        $results = !$filtered ? [] : $data->get();
+        return view('voucher.filter', ['results' => $results]);
     }
 
     /**
