@@ -29,6 +29,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereFkIdWaterSource($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereUpdatedAt($value)
+ * @property-read \App\Models\WaterSource $waterSource
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Penalty onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Penalty withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Penalty withoutTrashed()
  */
 class Penalty extends Model
 {

@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voucher whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voucher whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voucher whereVoucherUrl($value)
+ * @property-read \App\Models\Payment $payment
+ * @property-read \App\Models\TransactionType $transactionType
  */
 class Voucher extends Model
 {
@@ -87,7 +89,22 @@ class Voucher extends Model
             ->whereRaw('MONTH(date) = ' . $month);
         if ($movement !== null) {
             $query->where('fk_id_transaction_type', $movement);
+        } else {
+
+            $totalO = self::select(\DB::raw("SUM(amount) as total"))
+                ->whereRaw('MONTH(date) = ' . $month)
+                ->where('fk_id_transaction_type', TransactionType::OUTPUT)->get();
+
+            $totalI = self::select(\DB::raw("SUM(amount) as total"))
+                ->whereRaw('MONTH(date) = ' . $month)
+                ->where('fk_id_transaction_type', TransactionType::INPUT)->get();
+
+            return $totalI[0]->total - $totalO[0]->total;
         }
-        return $query->get();
+        $total = $query->get();
+        if ($movement === TransactionType::OUTPUT) {
+            return 0 - $total[0]->total;
+        }
+        return $total[0]->total;
     }
 }

@@ -1,0 +1,3 @@
+Finalmente en la practica que se realizo en laboratorio demostro que el motor de corrriente directa gira correspondiente al voltaje que se aplica y ahora conocemos el uso que nos brinda este tipo de motor ya que gracias ael junto con el potenciometro es posible tener un control de velocidad ya sea muy rapido o muy lento y esto me da el conocimiento de que puede ser aplicado en otras funciones o aplicaciones 
+En la practica hicimos las medicones de 5 volts y me pude dar cuenta que de acuerdo a la potencia del mismo es como se obtendra la revolucion del motor y se pudo contabilizar las vueltas que se generaba con la energia proporcionada
+En general esta fue una practica que me da un amplio panorama de las funciones y aplicaciones que le puedo dar a este tipo de motores.

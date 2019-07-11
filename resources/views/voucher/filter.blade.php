@@ -91,7 +91,7 @@
                         <tr>
                             <td>{{$voucher->id}}</td>
                             <td>{{$voucher->date}}</td>
-                            <td>{{$voucher->amount}}</td>
+                            <td>@asMoney($voucher->amount)</td>
                             <td>{{$voucher->description}}</td>
                             <td>{{$voucher->transactionType->name}}</td>
                         </tr>

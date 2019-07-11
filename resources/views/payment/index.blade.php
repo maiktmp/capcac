@@ -67,7 +67,7 @@
                     @forelse($penalties as $penalty)
                         <tr>
                             <td>{{$penalty->date}}</td>
-                            <td>{{$penalty->deleted_at}}</td>
+                            <td>{{$penalty->deleted_at->format('Y-m-d')}}</td>
                             <td>@asMoney($penalty->amount)</td>
                             <td>{{$penalty->description}}</td>
                         </tr>

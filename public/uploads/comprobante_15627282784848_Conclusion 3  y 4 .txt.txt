@@ -1,0 +1,15 @@
+
+===========================================
+		Conclusión 3
+===========================================
+
+
+Para esta practiva fue intersante el ver como funciona el potenciomereo en conjunto al arduino, y la importancia de convertidores analogicos a digitales, que convierten la resitencia del potenciometro a valores que pueden ser interpretados según se requiera, en el caso particular de nuestro potenciometro arroajaba valores de 0 a 1023 siendo que tenia una resistencia 10koms y eso lo pudimos observar en el monitor serie, porterior por medio de calculos se observo cuanto voltaje podia arrojar el potenciometro según la cantidad de giro que tenia, lo cual representa una de las muchas aplicaciónes que se le puede dar.
+
+
+===========================================
+		Conclusión 4
+==========================================
+
+
+En conjunto con la practica anterior se desarrollo esta, cuyo mayor punto a resaltar es el como se controla la intensidad de el led ya que no se controla a tra vez del arduino este solo funciona como interprete de la señal analogica arrojada por el portenciometro, la convierte a una señal digital y este valor es exportado a el puerto donde esta conectado el led, esto da como resultado la variación de intensidad de el led. Es muy interesante como funcina el convertidor analogico y las aplicaciónes que se le puede dar a eel mismo 

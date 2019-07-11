@@ -1,7 +1,6 @@
 @php
     /* @var $vouchers  \App\Models\Voucher[]*/
 $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-
 @endphp
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.all.min.js"></script>
@@ -58,20 +57,20 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
                                     @asMoney(
                                     \App\Models\Voucher::getSumInputs(
                                     $month['month'],
-                                    \App\Models\TransactionType::INPUT)[0]->total
+                                    \App\Models\TransactionType::INPUT)
                                     )
                                 </td>
                                 <td class="text-right">
                                     @asMoney(
                                     \App\Models\Voucher::getSumInputs(
                                     $month['month'],
-                                    \App\Models\TransactionType::OUTPUT)[0]->total
+                                    \App\Models\TransactionType::OUTPUT)
                                     )
                                 </td>
                                 <td class="text-right">
                                     @asMoney(
                                     \App\Models\Voucher::getSumInputs(
-                                    $month['month'])[0]->total
+                                    $month['month'])
                                     )
                                 </td>
                             </tr>

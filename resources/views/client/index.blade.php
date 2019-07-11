@@ -43,7 +43,7 @@
                         <td>{{$user->last_name}}</td>
                         <td class="text-center">
                             <a href="{{route('water_sources_index',['clientId'=>$user->client->id])}}"
-                               data-toggle="tooltip"
+                               data-toggle="tooltip"n
                                data-placement="top"
                                title="Ver tomas de agua">
                                 <i class="fas fa-tint fa-2x"></i>

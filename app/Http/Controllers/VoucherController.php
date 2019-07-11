@@ -55,9 +55,8 @@ class VoucherController extends Controller
         $description = $request->get('description', null);
         $start = $request->get('start', null);
         $end = $request->get('end', null);
-        $type = $request->get('type', 0) * 1;
+        $type = $request->get('type', null);
 
-//        return dd($end);
         $filtered = false;
         $data = Voucher::query();
         if (!is_null($id)) {
@@ -75,10 +74,14 @@ class VoucherController extends Controller
             $data->whereBetween('date', [$start, $end]);
         }
 
-        if ($type !== 0) {
+        if ($type !== "0") {
             $filtered = true;
             $data->where('fk_id_transaction_type', $type);
         }
+        if ($type === "0") {
+            $filtered = true;
+        }
+
 //        return dd($data);
 
         $results = !$filtered ? [] : $data->get();

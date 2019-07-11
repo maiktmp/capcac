@@ -117,8 +117,8 @@ class CreateWaterSourceSchema extends Migration
     public function down()
     {
         Schema::dropIfExists('penalty_payment');
-        Schema::dropIfExists('voucher');
         Schema::dropIfExists('payment');
+        Schema::dropIfExists('voucher');
         Schema::dropIfExists('penalty');
         Schema::dropIfExists('water_source');
         Schema::dropIfExists('water_source_type');

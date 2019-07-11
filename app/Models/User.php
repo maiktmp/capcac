@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * App\Models\User
@@ -33,7 +33,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
  * @property-read mixed $full_name
  */
-class User extends Model
+class User extends Authenticatable
 {
     protected $table = "user";
 
@@ -87,5 +87,10 @@ class User extends Model
     public function getFullNameAttribute()
     {
         return $this->name . " " . $this->last_name;
+    }
+
+    public function isAdmin()
+    {
+        return $this->fk_id_rol === Rol::ADMIN;
     }
 }

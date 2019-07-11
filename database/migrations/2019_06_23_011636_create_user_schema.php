@@ -18,6 +18,11 @@ class CreateUserSchema extends Migration
             $table->string('name');
         });
 
+        Schema::create('status_request', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+        });
+
         Schema::create('user', function (Blueprint $table) {
             $table->increments('id');
             $table->string('username');
@@ -35,11 +40,13 @@ class CreateUserSchema extends Migration
 
         Schema::create('request', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('attended')->default(false);
-            $table->string('description', 1000);
-            $table->string('last_name');
             $table->unsignedInteger('fk_id_user');
+            $table->unsignedInteger('fk_id_status_request');
             $table->timestamps();
+
+            $table->foreign('fk_id_status_request')
+                ->references('id')
+                ->on('status_request');
 
             $table->foreign('fk_id_user')
                 ->references('id')
@@ -50,11 +57,16 @@ class CreateUserSchema extends Migration
             $table->increments('id');
             $table->string('comment', 1000);
             $table->unsignedInteger('fk_id_request');
+            $table->unsignedInteger('fk_id_user_transmitter');
             $table->timestamps();
 
             $table->foreign('fk_id_request')
                 ->references('id')
                 ->on('request');
+
+            $table->foreign('fk_id_user_transmitter')
+                ->references('id')
+                ->on('user');
         });
 
         Schema::create('client', function (Blueprint $table) {
@@ -87,6 +99,8 @@ class CreateUserSchema extends Migration
         Schema::dropIfExists('follow_request');
         Schema::dropIfExists('request');
         Schema::dropIfExists('user');
+        Schema::dropIfExists('status_request');
         Schema::dropIfExists('rol');
     }
 }
+

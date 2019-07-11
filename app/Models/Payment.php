@@ -32,6 +32,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereStartDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Payment whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $fk_id_voucher
+ * @property-read \App\Models\Voucher $voucher
+ * @property-read \App\Models\WaterSource $waterSource
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Payment whereFkIdVoucher($value)
  */
 class Payment extends Model
 {

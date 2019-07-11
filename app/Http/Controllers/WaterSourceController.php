@@ -8,6 +8,7 @@ use App\Http\Request\UpdateUserRequest;
 use App\Http\Request\UpdateWaterSourceRequest;
 use App\Models\Client;
 use App\Models\WaterSource;
+use Auth;
 use Illuminate\Http\Request;
 
 class WaterSourceController extends Controller

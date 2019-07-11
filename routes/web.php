@@ -13,8 +13,23 @@
 
 Route::get('/', function () {
     return view('landing');
-});
+})->name('landing');
 
+
+Route::get(
+    'login',
+    'Auth\LoginController@showLoginForm'
+)->name('login')->middleware('guest');
+
+Route::post(
+    'login/auth',
+    'Auth\LoginController@authenticate'
+)->name('login.auth');
+
+Route::get(
+    'logout',
+    'Auth\LoginController@logout'
+)->name('logout');
 
 /*
  * ==========================================
@@ -145,7 +160,7 @@ Route::get(
 
 Route::get('transactions',
     'VoucherController@index')
-->name('transactions_index');
+    ->name('transactions_index');
 
 Route::view(
     'transaction/crete',
@@ -160,3 +175,23 @@ Route::post(
 Route::get('transactions/filer',
     'VoucherController@filter')
     ->name('transactions_filter');
+
+/*
+ * ==========================================
+ *              Requests
+ * ==========================================
+ */
+
+Route::get('requests/',
+    'RequestController@index')
+    ->name('request_index');
+
+Route::get('requests/{requestId}',
+    'RequestController@view')
+    ->name('request_view');
+
+Route::post('requests/{requestId}',
+    'RequestController@createComment')
+    ->name('request_view');
+
+

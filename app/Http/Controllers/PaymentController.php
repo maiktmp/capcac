@@ -16,7 +16,7 @@ class PaymentController extends Controller
     public function index($waterSourceId)
     {
         $payments = Payment::whereFkIdWaterSource($waterSourceId)->paginate(15);
-        $penalties = Penalty::withTrashed()->paginate(15);
+        $penalties = Penalty::onlyTrashed()->paginate(15);
         return view('payment.index', [
             'penalties' => $penalties,
             'payments' => $payments

@@ -95,7 +95,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="text-center" colspan="5"> No hay tomas ed agua registradas</td>
+                        <td class="text-center" colspan="5"> No hay tomas de agua registradas</td>
                     </tr>
                 @endforelse
                 </tbody>

@@ -16,7 +16,8 @@ class ClientController extends Controller
 
     public function index()
     {
-        $users = User::paginate(15);
+        $users = User::whereFkIdRol(Rol::CLIENT)
+            ->paginate(15);
         return view('client.index', ['users' => $users]);
     }
 

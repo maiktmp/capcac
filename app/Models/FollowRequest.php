@@ -22,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FollowRequest whereFkIdRequest($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FollowRequest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FollowRequest whereUpdatedAt($value)
+ * @property int $fk_id_user_transmitter
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\FollowRequest whereFkIdUserTransmitter($value)
  */
 class FollowRequest extends Model
 {
