@@ -74,6 +74,7 @@
       <data directive="@stack" injection="true" prefix="&lt;?php echo $__env-&gt;yieldContent(" suffix="); ?&gt;" />
       <data directive="@stop" />
       <data directive="@switch" injection="true" prefix="&lt;?php switch(" suffix="): ?&gt;" />
+      <data directive="@textarea" injection="true" prefix="&lt;?php [" suffix="]; ?&gt;" />
       <data directive="@unless" injection="true" prefix="&lt;?php if ( ! (" suffix=")): ?&gt;" />
       <data directive="@unset" injection="true" prefix="&lt;?php unset(" suffix="); ?&gt;" />
       <data directive="@verbatim" />

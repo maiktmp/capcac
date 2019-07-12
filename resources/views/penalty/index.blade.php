@@ -4,14 +4,17 @@
 
 <div class="row">
     <div class="col-12">
-        <table class="table table-stripped">
+        <table class="table table-striped">
             <thead>
             <tr>
                 <td>#</td>
                 <td>Fecha de multa</td>
                 <td>Monto</td>
                 <td>Comentarios</td>
-                <td></td>
+                @if(Auth::user()->isAdmin())
+                    <td>
+                    </td>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -21,16 +24,18 @@
                     <td>{{$penalty->date}}</td>
                     <td>{{$penalty->amount}}</td>
                     <td>{{$penalty->description}}</td>
-                    <td>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="{{route('penalty_pay',['penaltyId'=>$penalty->id])}}"
-                           class='btn-penalty-payment'
-                           data-toggle="tooltip"
-                           data-placement="top"
-                           title="Realizar pago">
-                            <i class="fas fa-money-bill fa-2x"></i>
-                        </a>
-                    </td>
+                    @if(Auth::user()->isAdmin())
+                        <td>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="{{route('penalty_pay',['penaltyId'=>$penalty->id])}}"
+                               class='btn-penalty-payment'
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               title="Realizar pago">
+                                <i class="fas fa-money-bill fa-2x"></i>
+                            </a>
+                        </td>
+                    @endif
                 </tr>
             @empty
                 <tr>

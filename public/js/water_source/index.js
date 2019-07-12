@@ -75,6 +75,7 @@ $(document).ready(function (e) {
             })
         });
     });
+
     $('.btn-list-penalties').click(function (e) {
         e.preventDefault();
         var url = $(this).attr('href');

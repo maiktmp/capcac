@@ -7,33 +7,45 @@
                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarToggler">
             {{--<img src="{{asset('img/logob-summa.png')}}" alt="Summa Multimarcas" height="60px">--}}
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{route('client_index')}}">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('transactions_index')}}">Transacciónes</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"
-                       data-toggle="dropdown"
-                       href="#"
-                       role="button"
-                       aria-haspopup="true"
-                       aria-expanded="false">Buzón</a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item"
-                           href="{{route('request_index',['type'=>\App\Models\StatusRequest::NEW])}}">Nueva</a>
-                        <a class="dropdown-item"
-                           href="{{route('request_index',['type'=>\App\Models\StatusRequest::IN_PROGRESS])}}">En
-                            progreso</a>
-                        <a class="dropdown-item"
-                           href="{{route('request_index',['type'=>\App\Models\StatusRequest::COMPLETED])}}">Completada</a>
-                    </div>
-                </li>
-            </ul>
+            @if(Auth::user()->isAdmin())
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('client_index')}}">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('transactions_index')}}">Transacciónes</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#"
+                           role="button"
+                           aria-haspopup="true"
+                           aria-expanded="false">Buzón</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item"
+                               href="{{route('request_index',['type'=>\App\Models\StatusRequest::NEW])}}">Nueva</a>
+                            <a class="dropdown-item"
+                               href="{{route('request_index',['type'=>\App\Models\StatusRequest::IN_PROGRESS])}}">En
+                                progreso</a>
+                            <a class="dropdown-item"
+                               href="{{route('request_index',['type'=>\App\Models\StatusRequest::COMPLETED])}}">Completada</a>
+                        </div>
+                    </li>
+                </ul>
+            @else
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('profile')}}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('client_requests')}}">Quejas y sugerencias</a>
+                    </li>
+                </ul>
+            @endif
         </div>
 
         <a class="ml-auto"

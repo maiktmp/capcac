@@ -90,5 +90,14 @@ class Client extends Model
         );
     }
 
+    public function fullAddress()
+    {
+        return $this->town . ", " .
+            $this->colony . ", " .
+            $this->zip_address . ", " .
+            $this->street . ".".
+            ' No.Ext. '.$this->ext_num ?? "S/n" . ", " .
+            ' No. Int '.$this->int_num ?? "S/n" . "." ;
+    }
 
 }

@@ -73,7 +73,7 @@ class LoginController extends Controller
             if (Auth::user()->fk_id_rol === Rol::ADMIN) {
                 $route = route('client_index');
             } else {
-                $route = route('client_index');
+                $route = route('profile');
             }
             return response()->json([
                 'success' => true,

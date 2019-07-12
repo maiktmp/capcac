@@ -10,8 +10,6 @@
         });
     </script>
 @endpush
-
-
 @extends('template.main')
 
 @section('content')
@@ -20,18 +18,33 @@
             <div class="card m-5  rounded">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12 text-center">
-                            <h4> Estatus {{$statusRequest->name}}</h4>
+                        <div class="col-12">
+                            @if($error !== null)
+                                <div class="alert alert-danger" role="alert">
+                                    {{$error}}
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="col-12 text-right">
+                                <a class="btn btn-raised btn-primary btn-upsert mx-3 mt-3"
+                                   href="{{route('client_create_request')}}"
+                                   role="button">Crear nueva queja</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <h4>Quejas y sugerencias</h4>
+                        </div>
                         <div class="col-12">
-                            <table class="table table-stripped table-selected">
+                            <table class="table table-striped table-selected">
                                 <thead>
                                 <tr>
-                                    <td>#</td>
+                                    <td>Folio</td>
                                     <td>Fecha</td>
-                                    <td>Cliente</td>
                                     <td>Estatus</td>
                                 </tr>
                                 </thead>
@@ -40,7 +53,6 @@
                                     <tr data-url="{{route('request_view',['requestId'=>$request->id])}}">
                                         <td>{{$request->id}}</td>
                                         <td>{{$request->created_at->format('Y-m-d')}}</td>
-                                        <td>{{$request->user->full_name}}</td>
                                         <td>{{$request->statusRequest->name}}</td>
                                     </tr>
                                 @empty

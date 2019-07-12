@@ -32,11 +32,24 @@ class RequestController extends Controller
 
     public function createComment(Request $request, $requestId)
     {
+        if (\Auth::user()->isAdmin()) {
+            $requestModel = RequestModel::find($requestId);
+            $requestModel->fk_id_status_request = StatusRequest::IN_PROGRESS;
+            $requestModel->save();
+        }
         $followRequest = new FollowRequest();
         $followRequest->comment = request('comment');
         $followRequest->fk_id_request = $requestId;
         $followRequest->fk_id_user_transmitter = \Auth::id();
         $followRequest->save();
+        return back();
+    }
+
+    public function markCompleted($requestId)
+    {
+        $requestModel = RequestModel::find($requestId);
+        $requestModel->fk_id_status_request = StatusRequest::COMPLETED;
+        $requestModel->save();
         return back();
     }
 }

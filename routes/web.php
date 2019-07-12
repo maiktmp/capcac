@@ -194,4 +194,25 @@ Route::post('requests/{requestId}',
     'RequestController@createComment')
     ->name('request_view');
 
+Route::get('request/{requestId}/mark_completed',
+    'RequestController@markCompleted')
+    ->name('request_completed');
 
+
+/*
+ * ==========================================
+ *              Clients
+ * ==========================================
+ */
+
+Route::get('profile/',
+    'clients\ClientController@profile')
+    ->name('profile');
+
+Route::get('client/requests/',
+    'clients\ClientController@requests')
+    ->name('client_requests');
+
+Route::get('client/request/create',
+    'clients\ClientController@createRequest')
+    ->name('client_create_request');

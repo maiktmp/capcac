@@ -7,10 +7,19 @@
   background-color: #001a67 !important;
   color: #FFFF;
 }
+.bg-message {
+  background-color: #dcf8c6;
+  border: 1px solid #dcf8c6 !important;
+}
 .card {
   box-shadow: 0px 0px 18px -5px rgba(0, 0, 0, 0.75);
 }
 .card-message {
+  box-shadow: none;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+.card-water-source {
   box-shadow: none;
   border: 1px solid grey;
   border-radius: 5px;
