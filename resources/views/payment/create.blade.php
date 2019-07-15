@@ -18,6 +18,11 @@
         </table>
     </div>
     <div class="col-12">
+        <div class="alert alert-danger errors-message" style="display: none">
+
+        </div>
+    </div>
+    <div class="col-12">
         <form id="form-create-payment"
               action="{{route('water_sources_create_payment_post',['waterSourceId'=>$waterSource->id])}}">
             @csrf
@@ -28,6 +33,7 @@
                         'label' => 'Desde',
                         'inputClass' =>'inp-date-picker',
                         'name'=>'start_date',
+                        'value' => $lastPayment->end_date ?? ""
                     ])
                 </div>
                 <div class="col-4">

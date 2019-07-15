@@ -111,7 +111,7 @@ class WaterSource extends Model
 
     }
 
-    public function diffMonths($startDate, $endDate)
+    public static function diffMonths($startDate, $endDate)
     {
 //        if ($this->payments->count() !== 0) {
 //            $startDate = $this->payments()->orderBy('end_date', 'DESC')->first();
@@ -119,5 +119,12 @@ class WaterSource extends Model
         $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
         $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
         return $startDate->diffInMonths($endDate);
+    }
+
+    public static function diffDays($startDate, $endDate)
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+        $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+        return $startDate->diffInDays($endDate);
     }
 }

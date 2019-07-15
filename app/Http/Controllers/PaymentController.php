@@ -26,17 +26,64 @@ class PaymentController extends Controller
     public function create($waterSourceId)
     {
         $waterSource = WaterSource::find($waterSourceId);
-        return view('payment.create', ['waterSource' => $waterSource]);
+        $lastPayment = Payment::whereFkIdWaterSource($waterSourceId)->orderBy('end_date', 'DESC')->first();
+        return view('payment.create', [
+            'waterSource' => $waterSource,
+            'lastPayment' => $lastPayment,
+        ]);
     }
 
     public function computePayment(Request $request, $waterSourceId)
     {
         $startDate = $request->get('start_date', null);
         $endDate = $request->get('end_date', null);
+
+        $moths = WaterSource::diffDays($startDate, $endDate);
+        if ($moths === 0) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Los pagos deben cubrir un mes.'
+            ]);
+        }
+        $days = WaterSource::diffDays($startDate, $endDate);
+        if ($days > 31) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Los pagos deben cubrir un mes.'
+            ]);
+        }
+
+        $paymentsExistsStart = Payment::whereFkIdWaterSource($waterSourceId)
+            ->whereBetween('start_date', [$startDate, $endDate])
+            ->get();
+
+        $paymentsExistsEnd = Payment::whereFkIdWaterSource($waterSourceId)
+            ->WhereBetween('end_date', [$startDate, $endDate])
+            ->get();
+
+        if (sizeof($paymentsExistsStart) > 0) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Ya existe un pago en el periodo de ' .
+                    $paymentsExistsStart[0]->start_date . " al " .
+                    $paymentsExistsStart[0]->end_date
+            ]);
+        }
+
+        if (sizeof($paymentsExistsEnd) > 0) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'Ya existe un pago en el periodo de ' .
+                    $paymentsExistsEnd[0]->start_date . " al " .
+                    $paymentsExistsEnd[0]->end_date
+            ]);
+        }
+
         $waterSource = WaterSource::find($waterSourceId);
         $total = $waterSource->computePayment($startDate, $endDate);
         $moths = $waterSource->diffMonths($startDate, $endDate);
         return response()->json([
+            'success' => true,
             'total' => $total,
             'months' => $moths
         ]);

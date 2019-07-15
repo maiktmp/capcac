@@ -26,6 +26,7 @@ $(document).ready(function (e) {
 
             $(document).on('click', '.btn-compute-payment', function (e) {
                 e.preventDefault();
+                $(".errors-message").css({'display': 'none'});
                 var url = $(this).attr('href');
                 var startDate = $("#inp-start-date").val();
                 var endDate = $("#inp-end-date").val();
@@ -34,15 +35,24 @@ $(document).ready(function (e) {
                 url = url.replace('FAKE_END_DATE', endDate);
 
                 $.get(url, function (response) {
-                    var total = response.total;
-                    var months = response.months;
-                    $("#lbl-total-payment").html("Total: $" + total);
-                    $("#lbl-total-months").html("Meses calculados: " + months);
-                    if (total > 0) {
-                        $('.btn-pay').attr('disabled', false)
+                    if (!response.success) {
+                        $(".errors-message").css({'display': 'block'}).html(response.errors);
+                        $('.btn-pay').attr('disabled', true);
+                        $("#lbl-total-payment").html("Total: $" + 0);
+                        $("#lbl-total-months").html("Meses calculados: " + 0);
+
                     } else {
-                        $('.btn-pay').attr('disabled', true)
+                        var total = response.total;
+                        var months = response.months;
+                        $("#lbl-total-payment").html("Total: $" + total);
+                        $("#lbl-total-months").html("Meses calculados: " + months);
+                        if (total > 0) {
+                            $('.btn-pay').attr('disabled', false)
+                        } else {
+                            $('.btn-pay').attr('disabled', true)
+                        }
                     }
+
                 });
             });
 
@@ -58,7 +68,7 @@ $(document).ready(function (e) {
         $('#modal-water-source-header').html('Pagos registrados');
         $('#modal-water-source-size').addClass('modal-lg');
         modalTools.renderView('modal-water-source', url);
-        $(document).on('click','.page-link',function (e) {
+        $(document).on('click', '.page-link', function (e) {
             e.preventDefault();
             modalTools.renderView('modal-water-source', $(this).attr('href'));
         });
@@ -82,11 +92,11 @@ $(document).ready(function (e) {
         $('#modal-water-source-header').html('Multas registradas');
         $('#modal-water-source-size').addClass('modal-lg');
         modalTools.renderView('modal-water-source', url);
-        $(document).on('click','.page-link',function (e) {
+        $(document).on('click', '.page-link', function (e) {
             e.preventDefault();
             modalTools.renderView('modal-water-source', $(this).attr('href'));
         });
-        $(document).on('click','.btn-penalty-payment',function (e) {
+        $(document).on('click', '.btn-penalty-payment', function (e) {
             e.preventDefault();
             var url = $(this).attr('href');
             Swal.fire({
@@ -99,7 +109,7 @@ $(document).ready(function (e) {
                 confirmButtonText: 'Pagar'
             }).then((result) => {
                 if (result.value) {
-                    $.get(url,function () {
+                    $.get(url, function () {
                         $('#modal-water-source').modal('hide');
                     });
                 }
