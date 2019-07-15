@@ -23,6 +23,21 @@
                     <a class="btn btn-raised btn-success mx-3 mt-3" href="{{route('client_create')}}" role="button">Agregar
                         Usuario</a>
                 </div>
+                <div class="row">
+                    <form method="get" action="{{route('client_index')}}">
+                        <div class="col-12 text-left d-flex flex-row align-items-end">
+                            @csrf
+                            @input([
+                                  'label' => 'Nombre del cliente',
+                                  'name' => 'name'
+                                  ])
+                            <button class="btn btn-raised btn-primary mx-3 mb-4 "
+                                    type="submit"
+                                    style="height: 35px;">Buscar
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
             <table class="table">
                 <thead>
@@ -43,7 +58,7 @@
                         <td>{{$user->last_name}}</td>
                         <td class="text-center">
                             <a href="{{route('water_sources_index',['clientId'=>$user->client->id])}}"
-                               data-toggle="tooltip"n
+                               data-toggle="tooltip" n
                                data-placement="top"
                                title="Ver tomas de agua">
                                 <i class="fas fa-tint fa-2x"></i>
@@ -64,7 +79,7 @@
                 @endforelse
                 </tbody>
             </table>
-            {{ $users->links() }}
+            {{--{{ $users->links() }}--}}
         </div>
     </div>
 @endsection

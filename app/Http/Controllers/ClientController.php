@@ -10,14 +10,22 @@ use App\Models\Rol;
 use App\Models\User;
 use DB;
 use Exception;
+use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::whereFkIdRol(Rol::CLIENT)
-            ->paginate(15);
+        $filterName = $request->get('name', null);
+        $users = User::whereFkIdRol(Rol::CLIENT)->paginate(15);
+
+        if ($filterName !== null) {
+            $users = User::whereFkIdRol(Rol::CLIENT)
+                ->whereRaw("CONCAT(name, ' ', last_name) LIKE '%" . $filterName . "%'")
+                ->paginate(15);
+        }
+
         return view('client.index', ['users' => $users]);
     }
 
