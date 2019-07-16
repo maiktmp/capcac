@@ -96,6 +96,7 @@ $(document).ready(function (e) {
             e.preventDefault();
             modalTools.renderView('modal-water-source', $(this).attr('href'));
         });
+
         $(document).on('click', '.btn-penalty-payment', function (e) {
             e.preventDefault();
             var url = $(this).attr('href');
@@ -115,6 +116,10 @@ $(document).ready(function (e) {
                 }
             })
         });
+
+        $(document).on('click', '.btn-upload-penalty-file', async function (e) {
+
+        })
     });
 });
 

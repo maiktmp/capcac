@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col-12">
                             @if($error !== null)
-                                <div class="alert alert-danger" role="alert">
+                                <div class="alert alert-success text-center" role="alert">
                                     {{$error}}
                                 </div>
                             @endif
@@ -57,7 +57,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="2">Sin Mensajes</td>
+                                        <td class="text-center" colspan="3">Sin Mensajes</td>
                                     </tr>
                                 @endforelse
                                 </tbody>

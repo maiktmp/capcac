@@ -124,6 +124,15 @@ Route::get('payment/{paymentId}/voucher',
     'PaymentController@viewPaymentVoucher'
 )->name('payment_voucher');
 
+Route::get(
+    'payment/{paymentId}/upload_file',
+    'PaymentController@uploadFile'
+)->name('payment_upload_file');
+
+Route::post(
+    'payment/{paymentId}/upload_file',
+    'PaymentController@uploadFilePost'
+)->name('payment_upload_file_post');
 
 /*
  * ==========================================
@@ -171,6 +180,7 @@ Route::post(
     'transaction/crete',
     'VoucherController@createPost'
 )->name('transaction_create_post');
+
 
 Route::get('transactions/filer',
     'VoucherController@filter')

@@ -46,12 +46,12 @@ class PaymentController extends Controller
             ]);
         }
         $days = WaterSource::diffDays($startDate, $endDate);
-        if ($days > 31) {
-            return response()->json([
-                'success' => false,
-                'errors' => 'Los pagos deben cubrir un mes.'
-            ]);
-        }
+//        if ($days > 31) {
+//            return response()->json([
+//                'success' => false,
+//                'errors' => 'Los pagos deben cubrir un mes.'
+//            ]);
+//        }
 
         $paymentsExistsStart = Payment::whereFkIdWaterSource($waterSourceId)
             ->whereBetween('start_date', [$startDate, $endDate])
@@ -104,7 +104,6 @@ class PaymentController extends Controller
         try {
             \DB::beginTransaction();
             $voucher->save();
-
             $payment = new Payment();
             $payment->fill($request->all());
             $payment->price = $waterSource->computePayment($startDate, $endDate);
@@ -124,5 +123,50 @@ class PaymentController extends Controller
     {
         $payment = Payment::with('voucher')->find($paymentId);
         return view('voucher.pdf', ['payment' => $payment]);
+    }
+
+    public function uploadFile($paymentId)
+    {
+        return view('penalty._upload_file', ['paymentId' => $paymentId]);
+    }
+
+    public function uploadFilePost(Request $request, $paymentId)
+    {
+        $fileOk = $request->hasFile('file_url') &&
+            $request->file('file_url')->isValid();
+
+        if ($fileOk) {
+            $fileUrl = $this->storeFile(
+                $request->file('file_url')
+            );
+            $payment = Payment::find($paymentId);
+            $payment->file_url = $fileUrl;
+        }
+    }
+
+
+    /**
+     * @param $file \File
+     * @param $bookCategoryId
+     * @return string
+     */
+    private function storeFile($file)
+    {
+        $path = '/uploads';
+
+        $name = 'comprobante_' . str_replace('.', '', (string)microtime(true)) . '_' . $file->getClientOriginalName() . '.' . $file->extension();
+
+        // Create path if does not exists
+        if (!file_exists(public_path() . $path)) {
+            mkdir(
+                public_path() . $path,
+                0777,
+                true
+            );
+        }
+
+        // Move image to corresponding directory
+        $file->move(public_path() . $path, $name);
+        return $path . '/' . $name;
     }
 }

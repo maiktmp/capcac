@@ -25,18 +25,20 @@ class ClientController extends Controller
         $requests = Request::whereFkIdUser(Auth::id())->get();
         return view('clients.request.index', [
             'requests' => $requests,
-            'error' => request('error')
+            'error' => request('errorMessage')
         ]);
     }
 
     public function createRequest()
     {
-        $hasRequest = Request::whereFkIdStatusRequest(StatusRequest::NEW)
-            ->whereFkIdUser(Auth::id())
-            ->count();
+        $hasRequest = Request::whereIn('fk_id_status_request', [
+            StatusRequest::IN_PROGRESS,
+            StatusRequest::NEW
+        ])->whereFkIdUser(Auth::id())
+           ->count();
         if ($hasRequest > 0) {
             return redirect()->route('client_requests',
-                ['errorMessage' => 'Ya tiene una solicitud en proceso, espere una respuesta']
+                ['errorMessage' => 'Tiene una solicitud en proceso, espere por favor.']
             );
         }
 

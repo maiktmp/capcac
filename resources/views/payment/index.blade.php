@@ -43,6 +43,7 @@
                             <td>@asMoney($payment->price)</td>
                             <td>{{$payment->start_date}}</td>
                             <td>{{$payment->end_date}}</td>
+
                         </tr>
                     @empty
                         <tr>

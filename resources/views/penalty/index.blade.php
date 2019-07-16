@@ -25,7 +25,7 @@
                     <td>{{$penalty->amount}}</td>
                     <td>{{$penalty->description}}</td>
                     @if(Auth::user()->isAdmin())
-                        <td>
+                        <td width="20%">
                             &nbsp;&nbsp;&nbsp;
                             <a href="{{route('penalty_pay',['penaltyId'=>$penalty->id])}}"
                                class='btn-penalty-payment'

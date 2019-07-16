@@ -80,6 +80,7 @@ class CreateWaterSourceSchema extends Migration
             $table->increments('id');
             $table->date('start_date');
             $table->date('end_date');
+            $table->string('file_url')->nullable();
             $table->decimal('price', 13, 2);
             $table->timestamps();
 
