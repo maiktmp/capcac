@@ -36,6 +36,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voucher whereVoucherUrl($value)
  * @property-read \App\Models\Payment $payment
  * @property-read \App\Models\TransactionType $transactionType
+ * @property string|null $file_url
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Voucher whereFileUrl($value)
  */
 class Voucher extends Model
 {

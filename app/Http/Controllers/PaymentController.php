@@ -91,7 +91,6 @@ class PaymentController extends Controller
 
     public function createPost(Request $request, $waterSourceId)
     {
-
         $waterSource = WaterSource::find($waterSourceId);
         $startDate = $request->input('start_date', null);
         $endDate = $request->input('end_date', null);
@@ -119,10 +118,10 @@ class PaymentController extends Controller
         }
     }
 
-    public function viewPaymentVoucher($paymentId)
+    public function viewPaymentVoucher($voucherId)
     {
-        $payment = Payment::with('voucher')->find($paymentId);
-        return view('voucher.pdf', ['payment' => $payment]);
+        $voucher = Voucher::find($voucherId);
+        return view('voucher.pdf', ['voucher' => $voucher]);
     }
 
     public function uploadFile($paymentId)

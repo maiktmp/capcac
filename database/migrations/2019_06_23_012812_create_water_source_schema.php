@@ -47,6 +47,21 @@ class CreateWaterSourceSchema extends Migration
                 ->on('water_source_type');
         });
 
+        Schema::create('voucher', function (Blueprint $table) {
+            $table->increments('id');
+            $table->date('date');
+            $table->decimal('amount', 13, 2);
+            $table->string('description')->nullable();
+            $table->string('voucher_url')->nullable();
+            $table->string('file_url')->nullable();
+            $table->timestamps();
+            $table->unsignedInteger('fk_id_transaction_type');
+
+            $table->foreign('fk_id_transaction_type')
+                ->references('id')
+                ->on('transaction_type');
+        });
+
         Schema::create('penalty', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date');
@@ -54,26 +69,16 @@ class CreateWaterSourceSchema extends Migration
             $table->decimal('amount', 13, 2);
             $table->timestamps();
             $table->softDeletes();
-
             $table->unsignedInteger('fk_id_water_source');
+            $table->unsignedInteger('fk_id_voucher')->nullable();
+
+            $table->foreign('fk_id_voucher')
+                ->references('id')
+                ->on('voucher');
 
             $table->foreign('fk_id_water_source')
                 ->references('id')
                 ->on('water_source');
-        });
-
-        Schema::create('voucher', function (Blueprint $table) {
-            $table->increments('id');
-            $table->date('date');
-            $table->decimal('amount', 13, 2);
-            $table->string('description')->nullable();
-            $table->string('voucher_url')->nullable();
-            $table->timestamps();
-            $table->unsignedInteger('fk_id_transaction_type');
-
-            $table->foreign('fk_id_transaction_type')
-                ->references('id')
-                ->on('transaction_type');
         });
 
         Schema::create('payment', function (Blueprint $table) {
@@ -119,8 +124,8 @@ class CreateWaterSourceSchema extends Migration
     {
         Schema::dropIfExists('penalty_payment');
         Schema::dropIfExists('payment');
-        Schema::dropIfExists('voucher');
         Schema::dropIfExists('penalty');
+        Schema::dropIfExists('voucher');
         Schema::dropIfExists('water_source');
         Schema::dropIfExists('water_source_type');
         Schema::dropIfExists('state');

@@ -38,7 +38,7 @@ class VoucherController extends Controller
             $voucher->description = $request->input('description', "");
             $voucher->fk_id_transaction_type = $request->input('fk_id_transaction_type');
             $voucher->date = Carbon::now();
-            $voucher->voucher_url = $fileUrl;
+            $voucher->file_url = $fileUrl;
             try {
                 $voucher->saveOrFail();
                 return response()->json(['success' => true]);
@@ -56,6 +56,8 @@ class VoucherController extends Controller
         $start = $request->get('start', null);
         $end = $request->get('end', null);
         $type = $request->get('type', null);
+        $month = $request->get('month', null);
+
 
         $filtered = false;
         $data = Voucher::query();
@@ -73,16 +75,26 @@ class VoucherController extends Controller
             $filtered = true;
             $data->whereBetween('date', [$start, $end]);
         }
+        if (!is_null($month)) {
+            $data->whereRaw(" MONTH(date) = " . $month);
+            $results = $data->get();
+
+            $months = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
+
+            return view('voucher.view_month', [
+                'results' => $results,
+                'month' => $months[$month-1]
+            ]);
+        }
 
         if ($type !== "0") {
             $filtered = true;
             $data->where('fk_id_transaction_type', $type);
         }
+
         if ($type === "0") {
             $filtered = true;
         }
-
-//        return dd($data);
 
         $results = !$filtered ? [] : $data->get();
         return view('voucher.filter', ['results' => $results]);

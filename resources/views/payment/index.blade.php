@@ -34,6 +34,7 @@
                         <th>Cantidad</th>
                         <th>Desde</th>
                         <th>Hasta</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,7 +44,17 @@
                             <td>@asMoney($payment->price)</td>
                             <td>{{$payment->start_date}}</td>
                             <td>{{$payment->end_date}}</td>
-
+                            @auth
+                                <td width="20%">
+                                    <a target='_blank'
+                                       href="{{route('payment_voucher',
+                                    ['voucherId'=>$payment->voucher->id])}}">
+                                        <i>
+                                            <i class="fas fa-money-check-alt fa-2x"></i>
+                                        </i>
+                                    </a>
+                                </td>
+                            @endauth
                         </tr>
                     @empty
                         <tr>
@@ -71,6 +82,17 @@
                             <td>{{$penalty->deleted_at->format('Y-m-d')}}</td>
                             <td>@asMoney($penalty->amount)</td>
                             <td>{{$penalty->description}}</td>
+                            @auth
+                                <td width="20%">
+                                    <a target='_blank'
+                                       href="{{route('payment_voucher',
+                                    ['voucherId'=>$penalty->voucher->id])}}">
+                                        <i>
+                                            <i class="fas fa-money-check-alt fa-2x"></i>
+                                        </i>
+                                    </a>
+                                </td>
+                            @endauth
                         </tr>
                     @empty
                         <tr>

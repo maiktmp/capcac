@@ -36,6 +36,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereDeletedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Penalty withTrashed()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Penalty withoutTrashed()
+ * @property int $fk_id_voucher
+ * @property-read \App\Models\Voucher $voucher
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Penalty whereFkIdVoucher($value)
  */
 class Penalty extends Model
 {
@@ -75,6 +78,15 @@ class Penalty extends Model
         return $this->belongsTo(
             WaterSource::class,
             'fk_id_water_source',
+            'id'
+        );
+    }
+
+    public function voucher()
+    {
+        return $this->belongsTo(
+            Voucher::class,
+            'fk_id_voucher',
             'id'
         );
     }

@@ -73,6 +73,12 @@ $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto"
                                     $month['month'])
                                     )
                                 </td>
+                                <td>
+                                    <a
+                                        href="{{route('transactions_filter',['month'=>$month['month']])}}">
+                                        <i class="fas fa-clipboard-list fa-2x"></i>
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
