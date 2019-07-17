@@ -45,7 +45,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td class="text-center" colspan="2">Sin Mensajes</td>
+                                        <td class="text-center" colspan="4">Sin Mensajes</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
