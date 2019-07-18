@@ -68,10 +68,34 @@ $(document).ready(function (e) {
         $('#modal-water-source-header').html('Pagos registrados');
         $('#modal-water-source-size').addClass('modal-lg');
         modalTools.renderView('modal-water-source', url);
+
+
         $(document).on('click', '.page-link', function (e) {
             e.preventDefault();
             modalTools.renderView('modal-water-source', $(this).attr('href'));
         });
+
+        $(document).on('click', '.btn-upload-file-voucher', async function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $('#modal-water-source-header').html('Subir archivo');
+            $('#modal-water-source-size').removeClass('modal-lg');
+            modalTools.renderView('modal-water-source', url, function () {
+                formTools.useAjaxOnSubmit(
+                    'form-upload-voucher-file',
+                    function (e) {
+                        Swal.fire({
+                            title: 'Archivo guardado',
+                            html: 'Archivo guardado con éxito',
+                            timer: 1500,
+                            onClose: () => {
+                                window.location.reload();
+                            }
+                        });
+                    }
+                )
+            });
+        })
     });
 
     $('.btn-create-penalty').click(function (e) {
@@ -117,9 +141,6 @@ $(document).ready(function (e) {
             })
         });
 
-        $(document).on('click', '.btn-upload-penalty-file', async function (e) {
-
-        })
     });
 });
 

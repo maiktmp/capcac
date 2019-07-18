@@ -1,9 +1,9 @@
 @php
     @endphp
 
-<form id="form_transaction_create"
+<form id="form-upload-voucher-file"
       enctype="multipart/form-data"
-      action="{{route('payment_upload_file',['paymentId'=>$paymentId])}}"
+      action="{{route('payment_upload_file_post',['paymentId'=>$paymentId])}}"
       method="post">
     @csrf
     <div class="row">

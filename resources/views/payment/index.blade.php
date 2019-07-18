@@ -45,7 +45,7 @@
                             <td>{{$payment->start_date}}</td>
                             <td>{{$payment->end_date}}</td>
                             @auth
-                                <td width="20%">
+                                <td width="25%">
                                     <a target='_blank'
                                        href="{{route('payment_voucher',
                                     ['voucherId'=>$payment->voucher->id])}}">
@@ -53,6 +53,24 @@
                                             <i class="fas fa-money-check-alt fa-2x"></i>
                                         </i>
                                     </a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn-upload-file-voucher"
+                                       href="{{route('payment_upload_file',
+                                              ['voucherId'=>$payment->voucher->id])}}">
+                                        <i>
+                                            <i class="fas fa-file-upload fa-2x"></i>
+                                        </i>
+                                    </a>
+                                    @if($payment->voucher->absolute_file_url !== null)
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a
+                                            target="_blank"
+                                            href="{{$payment->voucher->absolute_file_url}}">
+                                            <i>
+                                                <i class="fas fa-file-download fa-2x"></i>
+                                            </i>
+                                        </a>
+                                    @endif
                                 </td>
                             @endauth
                         </tr>
@@ -83,14 +101,32 @@
                             <td>@asMoney($penalty->amount)</td>
                             <td>{{$penalty->description}}</td>
                             @auth
-                                <td width="20%">
+                                <td width="25%">
                                     <a target='_blank'
                                        href="{{route('payment_voucher',
-                                    ['voucherId'=>$penalty->voucher->id])}}">
+                                       ['voucherId'=>$penalty->voucher->id])}}">
                                         <i>
                                             <i class="fas fa-money-check-alt fa-2x"></i>
                                         </i>
                                     </a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a class="btn-upload-file-voucher"
+                                       href="{{route('payment_upload_file',
+                                              ['voucherId'=>$penalty->voucher->id])}}">
+                                        <i>
+                                            <i class="fas fa-file-upload fa-2x"></i>
+                                        </i>
+                                    </a>
+                                    @if($penalty->voucher->absolute_file_url !== null)
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a
+                                            target="_blank"
+                                            href="{{$penalty->voucher->absolute_file_url}}">
+                                            <i>
+                                                <i class="fas fa-file-download fa-2x"></i>
+                                            </i>
+                                        </a>
+                                    @endif
                                 </td>
                             @endauth
                         </tr>

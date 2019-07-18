@@ -26,6 +26,16 @@
                             <i class="fas fa-money-check-alt fa-2x"></i>
                         </i>
                     </a>
+                    @if($voucher->absolute_file_url !== null)
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a
+                            target="_blank"
+                            href="{{$voucher->absolute_file_url}}">
+                            <i>
+                                <i class="fas fa-file-download fa-2x"></i>
+                            </i>
+                        </a>
+                    @endif
                 </td>
             </tr>
         @empty

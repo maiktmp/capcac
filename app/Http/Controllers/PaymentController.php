@@ -129,24 +129,24 @@ class PaymentController extends Controller
         return view('penalty._upload_file', ['paymentId' => $paymentId]);
     }
 
-    public function uploadFilePost(Request $request, $paymentId)
+    public function uploadFilePost(Request $request, $voucherId)
     {
         $fileOk = $request->hasFile('file_url') &&
             $request->file('file_url')->isValid();
-
         if ($fileOk) {
             $fileUrl = $this->storeFile(
                 $request->file('file_url')
             );
-            $payment = Payment::find($paymentId);
-            $payment->file_url = $fileUrl;
+            $voucher = Voucher::find($voucherId);
+            $voucher->file_url = $fileUrl;
+            $voucher->save();
+            return response()->json(['success' => true]);
         }
     }
 
 
     /**
      * @param $file \File
-     * @param $bookCategoryId
      * @return string
      */
     private function storeFile($file)

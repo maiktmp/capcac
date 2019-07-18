@@ -53,6 +53,7 @@ class PenaltyController extends Controller
         $penaltyPayment->save();
 
         $penalty->fk_id_voucher = $voucher->id;
+        $penalty->save();
         $penalty->delete();
 
         return response()->json(['success' => true]);

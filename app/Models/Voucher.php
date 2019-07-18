@@ -43,6 +43,8 @@ class Voucher extends Model
 {
     protected $table = "voucher";
 
+    protected $appends = ['absolute_file_url'];
+
     public static function rules()
     {
         return [
@@ -50,6 +52,7 @@ class Voucher extends Model
             'file_url' => 'required|file'
         ];
     }
+
 
     public static function messages()
     {
@@ -76,6 +79,11 @@ class Voucher extends Model
             'fk_id_voucher',
             'id'
         );
+    }
+
+    public function getAbsoluteFileUrlAttribute()
+    {
+        return $this->file_url === null ? null : asset($this->file_url);
     }
 
     public static function getMonths()
@@ -109,4 +117,5 @@ class Voucher extends Model
         }
         return $total[0]->total;
     }
+
 }
