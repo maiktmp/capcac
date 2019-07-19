@@ -45,6 +45,13 @@ class PaymentController extends Controller
                 'errors' => 'Los pagos deben cubrir un mes.'
             ]);
         }
+
+        if (WaterSource::endDateIsPast($startDate, $endDate)) {
+            return response()->json([
+                'success' => false,
+                'errors' => 'La fecha final no puede ser menor a la inicial'
+            ]);
+        }
         $days = WaterSource::diffDays($startDate, $endDate);
 //        if ($days > 31) {
 //            return response()->json([

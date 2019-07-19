@@ -127,4 +127,11 @@ class WaterSource extends Model
         $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
         return $startDate->diffInDays($endDate);
     }
+
+    public static function endDateIsPast($startDate, $endDate)
+    {
+        $startDate = Carbon::createFromFormat('Y-m-d', $startDate);
+        $endDate = Carbon::createFromFormat('Y-m-d', $endDate);
+        return $endDate->lessThan($startDate);
+    }
 }
