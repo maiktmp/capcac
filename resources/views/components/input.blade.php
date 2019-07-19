@@ -4,15 +4,15 @@
             Properties to use the input component
                          @input()
     *************************************************
-     @property string        $label      => Set label name
-     @property string        $name       => Set name for input
-     @property string|null   $errorName  => Set key for errors, use the $name as the default value
-     @property string|null   $type       => Set type of input use "text" as the default value
-     @property string|null   $value      => Set value for input
-     @property string|null   $labelClass => Use set class label
-     @property string|null   $id         => Use set Id to input
-     @property string|null   $inputClass => Set class of input
-     @property string[]|null $properties => Array of properties example ['disabled' => true ]
+     @property string        label      => Set label name
+     @property string        name       => Set name for input
+     @property string|null   errorName  => Set key for errors, use the $name as the default value
+     @property string|null   type       => Set type of input use "text" as the default value
+     @property string|null   value      => Set value for input
+     @property string|null   labelClass => Use set class label
+     @property string|null   id         => Use set Id to input
+     @property string|null   inputClass => Set class of input
+     @property string[]|null properties => Array of properties example ['disabled' => true ]
      */
     $name=$name??'';
     $type=$type??'text';

@@ -258,3 +258,24 @@ Route::get('client/request/create',
     'clients\ClientController@createRequest')
     ->name('client_create_request')
     ->middleware('auth');
+
+/*
+ * ==========================================
+ *              Prices
+ * ==========================================
+ */
+
+Route::get('prices/',
+    'PriceController@update')
+    ->name('update_prices')
+    ->middleware('auth');
+
+Route::post('prices',
+    'PriceController@updatePost')
+    ->name('update_prices_post')
+    ->middleware('auth');
+
+Route::get('client/request/create',
+    'clients\ClientController@createRequest')
+    ->name('client_create_request')
+    ->middleware('auth');

@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
 class WaterSourceType extends Model
 {
     protected $table = "water_source_type";
-
+    public $timestamps = false;
 
     public static function asMap()
     {

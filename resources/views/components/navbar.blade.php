@@ -35,6 +35,9 @@
                                href="{{route('request_index',['type'=>\App\Models\StatusRequest::COMPLETED])}}">Completada</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link prices-update" href="{{route('update_prices')}}">Precios</a>
+                    </li>
                 </ul>
             @else
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
