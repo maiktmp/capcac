@@ -2,16 +2,16 @@
     /* @var $voucher  \App\Models\Voucher*/
 @endphp
 @push('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/locale/es.js"></script>
+    <script src="{{asset('CDN/sweetalert2.all.js')}}"></script>
+    <script src="{{asset('CDN/moment.js')}}"></script>
+    <script src="{{asset('CDN/moment.js_locale_es.js')}}"></script>
     <script src="{{asset('commons/date_picker/bootstrap-material-datetimepicker.js')}}"></script>
     <script src="{{asset('commons/modal_tools.js')}}"></script>
     <script src="{{asset('commons/form_tools.js')}}"></script>
     <script src="{{asset('js/voucher/filter.js')}}"></script>
 @endpush
 @push('css')
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    <link href="{{asset('CDN/material_icons.css')}}"
           rel="stylesheet"/>
     <link rel="stylesheet"
           href="{{asset('commons/date_picker/bootstrap-material-datetimepicker.css')}}">
